@@ -9,48 +9,66 @@
         width: 30px; /* Adjust the width as needed */
         height: 30px; /* Adjust the height as needed */     
     }
-        .package-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
+
+    .button-custom {
+        background-color: #006ea8;
+        border: 4px;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 2px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
     }
-    .package-item {
-        flex: 1 1 calc(45% - 20px);
-        background-color: #ffffff;
-        border: 1px solid #dee2e6;
-        border-radius: 10px;
-        padding: 20px;
+
+    .button-custom:hover {
+        background-color: white;
+        color: #006ea8;
+        border: 1px solid #006ea8;
+    }
+
+    .card {
+        margin-top: 40px;
+        border-radius: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s, box-shadow 0.3s;
-        margin-bottom: 20px;
+        
     }
-    .package-item:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+
+    .card-body {
+        height: 280px
+        padding: 20px;
     }
-    .package-item h5 {
-        color: #007bff;
-    }
-    .package-item .price {
-        color: #28a745;
+
+    .card-body h5 button {
         font-weight: bold;
-    }
-    .package-item .btn-buy {
-        background-color: #007bff;
-        color: #fff;
+        border-radius: 18px;
+        width: 75%;
+        height: 50%;
+        color: white;
+        background-color: #006ea8;
         border: none;
-        padding: 10px 20px;
-        border-radius: 5px;
-        text-transform: uppercase;
-        font-weight: bold;
-        margin-top: 15px;
-        transition: background-color 0.3s;
     }
-    .package-item .btn-buy:hover {
+
+    .card-body h5 button:hover {
         background-color: #0056b3;
     }
 
+    .card-body .card-text {
+        font-weight: bold;
+    }
+
+    .list-group-item {
+        font-size: 14px;
+    }
+
+    .list-group-item i {
+        font-size: 24px;
+        color: #006ea8;
+    }    
+    
 </style>
 
 <body>
@@ -98,7 +116,6 @@
             >
             <div class="dropdown-menu m-0">
               {% for service in service %}
-              {% comment %} a href="{% url 'details' category_slug=category.slug %}">{{ category.category_name }} {% endcomment %}
               <a href="{% url 'details' service.slug %}" class="dropdown-item">
                 <img
                   src="{% static 'img\hm.png' %}"
@@ -172,9 +189,7 @@
     >     
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <video id="video" width="100%" height="75%" autoplay muted loop>
-            <source src="{% static 'img/adlytic.mp4' %}" type="video/mp4" />
-          </video>
+           <img class="w-100" src="{% static 'img/phn.jpg'%}" alt="Image" />
         </div>
       </div>
     </div>
@@ -182,78 +197,51 @@
   <!-- Navbar & Carousel End -->
 
 
-  <!-- Service Start -->
-  <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
-    <div class="container py-5">
-      <div
-        class="section-title text-center position-relative pb-3 mb-5 mx-auto"
-        style="max-width: 1600px"
-      >
-        <h5 class="fw-bold text-primary text-uppercase">Supply chain information:</h5>
-        <h6 class="text-justify">
-        {{category.content}}
-        <h5 class="fw-bold text-primary text-uppercase">Classification</h5>
-
-   </div>
-      <div class="row g-5">
-        {% for package in package %}
-        <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-          <div
-            class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
-          >
-            <div class="service-icon">
-              <i class="fa fa-shield-alt text-white"></i>
-            </div>
-            <h5 class="mb-3">{{ package.package_name }}</h5>
-            <p class="m-0">
-              Supply Chain Info Of Footware Today
-            </p>
-            <a class="btn btn-lg btn-primary rounded" href="">
-              <i class="bi bi-arrow-right"></i>
-            </a>
-          </div>
-        </div>
-       {% endfor %}
-        <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
-          <div
-            class="position-relative bg-primary rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-5"
-          >
-            <h3 class="text-white mb-3">Call Us For Quote</h3>
-            <p class="text-white mb-3">
-              Get in touch with us for a personalized quote tailored to your
-              requirements.
-            </p>
-            <h2 class="text-white mb-0">+8801671166809</h2>
-          </div>
-        </div>
-         </div>
-    </div>
-  </div>
-  <!-- Service End -->
-
-
-
-<div class="container-fluid py-5">
-    <div class="container py-5">
-        <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px">
-            <h5 class="fw-bold text-primary text-uppercase">{{ category.category_name }} Packages</h5>
-        </div>
-        <div class="package-container">
-            {% for package in package %}
-            <div class="package-item">
-                <h5>{{ package.package_name }}</h5>
-                <p class="price">{{ package.amount }} BDT</p>
-                <p><strong>Functions:</strong> {{ package.functions }}</p>
-                <p><strong>Calling Software:</strong> {{ package.calling_software }}</p>
-                <p><strong>CRM:</strong> {{ package.crm }}</p>
-                <p><strong>Ticket Software:</strong> {{ package.ticket_software }}</p>
-                <p><strong>User Administration:</strong> {{ package.user_administration }}</p>
-                <p><strong>Extra:</strong> {{ package.extra }}</p>
-                <button class="btn-buy">Buy Now</button>
+<br><br><br>
+<div style="background: url('{% static 'img/Background/background3.png.jpg' %}'); background-size: cover; background-position: center; height: 500px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            {% for pkg in package %}
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="text-center">
+                            <button type="button" class="btn btn">{{ pkg.package_name }}</button>
+                        </h5>
+                        <hr>
+                        <p class="card-text text-center" style="margin-top: -10px;">{{ pkg.amount }} / Month</p>
+                        <hr style="margin-top: -10px;">
+                        {% comment %} {% if pkg.functions %}
+                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.functions }}</li>
+                        {% endif %} {% endcomment %}
+                        {% if pkg.calling_software %}
+                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.calling_software }}</li>
+                        {% endif %}
+                        {% if pkg.crm %}
+                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.crm }}</li>
+                        {% endif %}
+                        {% if pkg.ticket_software %}
+                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.ticket_software }}</li>
+                        {% endif %}
+                        {% if pkg.user_administration %}
+                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.user_administration }}</li>
+                        {% endif %}
+                        {% comment %} {% if pkg.extra %}
+                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.extra }}</li>
+                        {% endif %} {% endcomment %}
+                        <hr>
+                        <div class="text-center">
+                            <button type="button" class="button-custom">
+                                <a href="" style="text-decoration: none; color: inherit;">Buy Now</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
             {% endfor %}
         </div>
     </div>
 </div>
+
 {% endblock %}
 </body>
