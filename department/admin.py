@@ -8,7 +8,7 @@ class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('category_name',)}  
 
 class PackageAdmin(admin.ModelAdmin):
-    list_display = ['package_name', 'amount']
+    list_display = ['functions', 'amount']
     filter_horizontal = ('category',)
  
 

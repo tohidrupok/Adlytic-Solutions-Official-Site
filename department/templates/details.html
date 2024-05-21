@@ -75,9 +75,7 @@
   <!-- Spinner Start -->
   <div
     id="spinner"
-    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
-  >
-    <div class="spinner"></div>
+    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
   </div>
   <!-- Spinner End -->
 
@@ -156,14 +154,14 @@
               >Package</a
             >
             <div class="dropdown-menu m-0">
-              {% for softwear in softwear %}
-              <a href="" class="dropdown-item">
+              {% for package in package %}
+              <a href="{% url 'details' package.slug %}" class="dropdown-item">
                 <img
                   src="{% static 'img/Cloud.png' %}"
                   alt="Newsletter Subscription Icon"
                   class="icon"
                 />
-                {{softwear.category_name}}
+                {{package.category_name}}
               </a> 
                {% endfor %} 
              
@@ -180,7 +178,7 @@
                 <a href="https://htmlcodex.com/startup-company-website-template" class="btn btn-primary py-2 px-4 ms-3">Download Pro Version</a>
 				-->
       </div>
-    </nav>
+    </nav> 
 
     <div
       id="header-carousel"
@@ -189,59 +187,81 @@
     >     
       <div class="carousel-inner">
         <div class="carousel-item active">
-           <img class="w-100" src="{% static 'img/phn.jpg'%}" alt="Image" />
-        </div>
+          <img class="w-100" src="{% static 'img/call.jpg'%}" alt="Image" />
+          <div
+            class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+          >
+            <div class="p-3" style="max-width: 900px">
+              <h5 class="text-white text-uppercase mb-3 animated slideInDown">
+                Creative & Innovative
+              </h5>
+              <h2 class="display-1 text-white mb-md-4 animated zoomIn">
+               Call centers improve customer service
+              </h2>
+            </div>
+          </div>
+        </div> 
       </div>
     </div>
   </div>
-  <!-- Navbar & Carousel End -->
+  <!-- Navbar & Carousel End --> 
 
+    <!-- Service Start -->
+  <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-1">
+      <div
+        class="section-title text-center "
+        style="max-width: 1600px"
+      >
+        <h5 class="fw-bold text-primary text-uppercase"> {{category.category_name}}</h5>
+        <h5 class="text-justify">
+        {{category.content}}
+        </h5>
+  </div>
+    </div>
+  </div>
+  <!-- Service End -->
 
-<br><br><br>
-<div style="background: url('{% static 'img/Background/background3.png.jpg' %}'); background-size: cover; background-position: center; height: 500px;">
-    <div class="container">
-        <div class="row justify-content-center">
-            {% for pkg in package %}
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="text-center">
-                            <button type="button" class="btn btn">{{ pkg.package_name }}</button>
-                        </h5>
-                        <hr>
-                        <p class="card-text text-center" style="margin-top: -10px;">{{ pkg.amount }} / Month</p>
-                        <hr style="margin-top: -10px;">
-                        {% comment %} {% if pkg.functions %}
-                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.functions }}</li>
-                        {% endif %} {% endcomment %}
-                        {% if pkg.calling_software %}
-                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.calling_software }}</li>
-                        {% endif %}
-                        {% if pkg.crm %}
-                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.crm }}</li>
-                        {% endif %}
-                        {% if pkg.ticket_software %}
-                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.ticket_software }}</li>
-                        {% endif %}
-                        {% if pkg.user_administration %}
-                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.user_administration }}</li>
-                        {% endif %}
-                        {% comment %} {% if pkg.extra %}
-                        <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.extra }}</li>
-                        {% endif %} {% endcomment %}
-                        <hr>
-                        <div class="text-center">
-                            <button type="button" class="button-custom">
-                                <a href="" style="text-decoration: none; color: inherit;">Buy Now</a>
-                            </button>
+  <!-- Packeeg Start -->
+    <br><br><br> 
+  <div  style="background: url('{% static 'img/Background/background3.png.jpg' %}'); background-size: cover; background-position: center; ">
+        <div class="container">
+            <div class="row justify-content-center">
+                {% for pkg in all_pakg %}
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="text-center">
+                                <button type="button" class="btn btn">{{ pkg.functions }}</button>
+                            </h5>
+                            <hr>
+                            <p class="card-text text-center" style="margin-top: -10px;">{{ pkg.amount }} / Month</p>
+                            <hr style="margin-top: -10px;">
+                            {% if pkg.calling_software %}
+                            <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.calling_software }}</li>
+                            {% endif %}
+                            {% if pkg.crm %}
+                            <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.crm }}</li>
+                            {% endif %}
+                            {% if pkg.ticket_software %}
+                            <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.ticket_software }}</li>
+                            {% endif %}
+                            {% if pkg.user_administration %}
+                            <li class="list-group-item"><i class="fa fa-caret-right"></i> {{ pkg.user_administration }}</li>
+                            {% endif %}
+                            <hr>
+                            <div class="text-center">
+                                <button type="button" class="button-custom">
+                                    <a href="" style="text-decoration: none; color: inherit;">Buy Now</a>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
         </div>
     </div>
-</div>
-
+  <!-- Packeeg End -->
 {% endblock %}
 </body>
