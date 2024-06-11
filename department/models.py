@@ -19,6 +19,7 @@ class Category(models.Model):
 
 class Package(models.Model):
     category = models.ManyToManyField(Category, related_name='packages')
+    package_name = models.CharField(max_length=100, null=True, blank=True)
     functions = models.TextField(null=True, blank=True) 
     amount = models.CharField(max_length=10)
     calling_software = models.TextField(null=True, blank=True)
