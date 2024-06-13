@@ -232,7 +232,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h5 class="text-center">
-                                <button type="button" class="btn btn">{{ pkg.functions }}</button>
+                                <button type="button" class="btn btn">{{ pkg.package_name }}</button>
                             </h5>
                             <hr>
                             <p class="card-text text-center" style="margin-top: -10px;">{{ pkg.amount }} / Month</p>
@@ -252,7 +252,7 @@
                             <hr>
                             <div class="text-center">
                                 <button type="button" class="button-custom">
-                                    <a href="" style="text-decoration: none; color: inherit;">Buy Now</a>
+                                    <a href="{% url 'buy' pkg.id %}" style="text-decoration: none; color: inherit;">Buy Now</a>
                                 </button>
                             </div>
                         </div>

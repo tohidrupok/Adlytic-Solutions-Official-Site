@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Package , Name
+from .models import Category, Package , Name, PackageOrder
 
 
 class CategoryAdmin(admin.ModelAdmin): 
@@ -7,12 +7,20 @@ class CategoryAdmin(admin.ModelAdmin):
 
     prepopulated_fields = {'slug': ('category_name',)}  
 
-class PackageAdmin(admin.ModelAdmin):
-    list_display = ['functions', 'amount']
-    filter_horizontal = ('category',)
- 
+class PackageAdmin(admin.ModelAdmin): 
+    list_display = ['package_name', 'amount']
+    filter_horizontal = ('category',) 
+
+    prepopulated_fields = {'functions': ('package_name',)}  
+
+class PackageOrderAdmin(admin.ModelAdmin):
+    list_display = ('name', 'package', 'contact')
+    search_fields = ('name', 'package__name', 'email')
+    
+
 
 admin.site.register(Name)
+admin.site.register(PackageOrder,PackageOrderAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Package, PackageAdmin) 
 

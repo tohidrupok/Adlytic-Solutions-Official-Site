@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Package
+from .models import Category, Package , PackageOrder 
+from .forms import PurchaseForm
 
 # Create your views here.
 def home(request):  
@@ -27,5 +28,21 @@ def details(request, category_slug=None):
     context = {'category': category, 'package': package, 'service': service, 'softwear': softwear, 'all_pakg': all_pakg}
 
 
-    return render(request, 'details.html', context)
+    return render(request, 'details.html', context) 
+
+
+def buy(request, id):
+    package = get_object_or_404(Package, pk=id)
+    print(package)
+    if request.method == 'POST':
+        form = PurchaseForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.package = package  #model aa package save
+            order.save()
+            return render(request, 'buy.html', {'form': form, 'success': True, 'id': id})
+    else:
+        form = PurchaseForm()
+
+    return render(request, 'buy.html', {'form': form, 'success': False, 'id': id, 'package': package})
     
