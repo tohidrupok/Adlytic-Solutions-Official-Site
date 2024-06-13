@@ -16,7 +16,7 @@
 <body>
 
 <div class="container">
-    <h2>Buy Now</h2>
+    <h2>Buy/Purches Now </h2>
     <p>Ordering: <strong>{{ package.package_name }}</strong></p>
     <form method="post" action="{% url 'buy' id %}">
         {% csrf_token %}
