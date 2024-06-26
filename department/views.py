@@ -32,17 +32,26 @@ def details(request, category_slug=None):
 
 
 def buy(request, id):
-    package = get_object_or_404(Package, pk=id)
-    print(package)
+
+    service = Category.objects.filter(group__part="service") 
+    softwear = Category.objects.filter(group__part="softwear_solution")
+    packages = Category.objects.filter(group__part="package")
+
+    
+    
+    package = get_object_or_404(Package, pk=id) 
     if request.method == 'POST':
         form = PurchaseForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
             order.package = package  #model aa package save
             order.save()
-            return render(request, 'buy.html', {'form': form, 'success': True, 'id': id})
+            context = {'form': form, 'success': True, 'id': id,'service': service, 'softwear': softwear, 'packages': packages} 
+
+            return render(request, 'buy.html', context)
     else:
         form = PurchaseForm()
 
-    return render(request, 'buy.html', {'form': form, 'success': False, 'id': id, 'package': package})
-    
+    context = {'package': package, 'form': form, 'success': False, 'id': id,'service': service, 'softwear': softwear, 'packages': packages}
+    return render(request, 'buy.html', context)
+     
