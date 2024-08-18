@@ -1,0 +1,211 @@
+{% extends 'index.html' %}
+{% block body %}
+{% load static %}
+<style>
+    .text-justify {
+        text-align: justify;
+    }
+    .icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .unique-container {
+        width: 80%;
+        margin: auto;
+        overflow: hidden;
+        padding: 20px;
+    }
+
+    .unique-h1, .unique-h2 {
+        color: #2c3e50;
+    }
+
+    .unique-why-need-us, .unique-core-services, .unique-about-us {
+        margin-bottom: 50px;
+    }
+
+    .unique-why-need-us ul, .unique-core-services ul, .unique-values ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .unique-why-need-us ul li, .unique-core-services ul li, .unique-values ul li {
+        background: #fff;
+        margin: 10px 0;
+        padding: 15px;
+        border-left: 5px solid #3498db;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .unique-values {
+        background: #ecf0f1;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .unique-values table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .unique-values table, .unique-values th, .unique-values td {
+        border: 1px solid #ddd;
+    }
+
+    .unique-values th, .unique-values td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .unique-values th {
+        background: #3498db;
+        color: white;
+    }
+</style>
+
+<body>
+  <!-- Spinner Start -->
+  <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"></div>
+  <!-- Spinner End -->
+
+  <!-- Navbar & Carousel Start -->
+  <div class="container-fluid position-relative p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+      <a href="{% url 'home' %}" class="navbar-brand p-0">
+        <h1 class="m-0">
+          <img class="w-100" src="{% static 'img/logo/png.png' %}" height="100px" width="200px" alt="Image" />
+        </h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+          <a href="#" class="nav-item nav-link active">About</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
+            <div class="dropdown-menu m-0">
+              {% for service in service %}
+              <a href="{% url 'details' service.slug %}" class="dropdown-item">
+                <img src="{% static 'img/hm.png' %}" alt="Certifications and Standards Icon" class="icon" />
+                {{service.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Software & Solution</a>
+            <div class="dropdown-menu m-0">
+              {% for softwear in softwear %}
+              <a href="{% url 'details' softwear.slug %}" class="dropdown-item">
+                <img src="{% static 'img/Cloud.png' %}" alt="Newsletter Subscription Icon" class="icon" />
+                {{softwear.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Package</a>
+            <div class="dropdown-menu m-0">
+              {% for package in packages %}
+              <a href="{% url 'details' package.slug %}" class="dropdown-item">
+                <img src="{% static 'img/Cloud.png' %}" alt="Newsletter Subscription Icon" class="icon" />
+                {{package.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <a href="" class="nav-item nav-link">Portfolio</a>
+          <a href="" class="nav-item nav-link"> Team</a>
+          <a href="" class="nav-item nav-link">Client</a>
+          <a href="" class="nav-item nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="w-100" src="{% static 'img/details.jpeg' %}" alt="Image" />
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+            <div class="p-3" style="max-width: 900px">
+              <h5 class="text-white text-uppercase mb-3 animated slideInDown">Creative & Innovative</h5>
+              <h2 class="display-1 text-white mb-md-4 animated zoomIn">Call centers improve customer service</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navbar & Carousel End -->
+
+  <!-- About Section Start -->
+  <div class="unique-container">
+
+    <section class="unique-about-us">
+        <h2 class="unique-h2">About Us</h2>
+        <p>Adlytic Solutions is a fast-growing consultancy firm specializing in Call Center Operations, Software Development, and Business Process Outsourcing.</p>
+        <p>We have started our journey since May 2023. Located in DOHS, Mohakhali, Center of Dhaka, Bangladesh.</p>
+        <p>Adlytic Solutions always represents trustworthy and ethical leadership. Our values will help us sustain and continue to drive us into the future.</p>
+        
+        <div class="unique-values">
+            <h3>Adlytic Vision & Values</h3>
+            <p>Our aim is to build strong relationships with dedication & trust, serving clients locally & internationally with quality outsourcing processes.</p>
+            <table>
+                <tr>
+                    <th>Value</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>Being Modest</td>
+                    <td>Be Respectful to all</td>
+                </tr>
+                <tr>
+                    <td>Being Creative</td>
+                    <td>Always creative to be ahead of the challenge</td>
+                </tr>
+                <tr>
+                    <td>Integrity</td>
+                    <td>Doing the right things always with trust</td>
+                </tr>
+                <tr>
+                    <td>Relationship</td>
+                    <td>Nurturing the partnerships to bring positive outcomes</td>
+                </tr>
+                <tr>
+                    <td>Service Excellence</td>
+                    <td>Provide Excellent Service to all our clients</td>
+                </tr>
+            </table>
+        </div>
+    </section> 
+
+    <section class="unique-core-services">
+        <h2 class="unique-h2">Core Services of Adlytic Solutions</h2>
+        <p>Since its inception, Adlytic Solutions' state-of-the-art Contact Center has been in continuous operation. It possesses the art of integrating skilled human resources with cutting-edge technology. Based in Dhaka, Bangladesh, Adlytic Solutions strives to shake up the industry by leveraging emerging opportunities in the business. Over the past years, the company has developed the capabilities and gained the experience necessary to stand out both in the local and global markets. Maintaining the competitive advantages over the competitors of the same industry, it has established sustainable development of its business toward the vision of fulfilling its missions.</p>
+        <p>We offer customized CRM (Customer Resource Management), CMS (Complain Management Service)/i-Ticketing, SQM Tracker for clients, which help them to manage customer relationships before & after in a simple way. We are committed to providing faster service for the customer.</p>
+    </section> 
+
+    <section class="unique-why-need-us">
+        <h1 class="unique-h1">Why Need Us?</h1>
+        <ul>
+            <li>You have a Contact Center! Did it meet your expectations?</li>
+            <li>Did your solution deliver your expectations?</li>
+            <li>You have a smart call center solution, are you converting your service operation into a smart process?</li>
+            <li>We provide analytics of product & service</li>
+            <li>Bring insight into customer views</li>
+            <li>Engage your operations in business development</li>
+            <li>Bring all related people onto a single platform</li>
+            <li>Develop your product quality consequences</li>
+            <li>Help you to see your motion, not only CC solution operation</li>
+            <li>Make your investment true.</li>
+        </ul>
+    </section> 
+
+  </div>
+  <!-- About Section End -->
+
+{% endblock %}
+</body>

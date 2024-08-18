@@ -10,7 +10,7 @@ def home(request):
 
     context = {'service': service, 'softwear': softwear, 'package': package}  
 
-    return render(request, 'home.html', context) 
+    return render(request, 'home2.html', context) 
 
 
 def details(request, category_slug=None):
@@ -55,3 +55,6 @@ def buy(request, id):
     context = {'package': package, 'form': form, 'success': False, 'id': id,'service': service, 'softwear': softwear, 'packages': packages}
     return render(request, 'buy.html', context)
      
+
+def about(request):
+    return render(request,'about.html')

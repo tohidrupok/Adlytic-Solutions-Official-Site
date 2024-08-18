@@ -1,0 +1,725 @@
+{% extends 'index.html' %} 
+{% block body %}
+{% load static %}
+
+<style>
+    @media screen and (max-width: 992px) {
+        #video {
+            max-width: 100%;
+            height: auto;
+        }
+        .video-section {
+            margin-left: 0; /* Reset margin left for smaller screens */
+        }
+    }
+    .icon {
+        width: 30px; /* Adjust the width as needed */
+        height: 30px; /* Adjust the height as needed */
+    }
+    .background-image {
+        background-image: url('{% static "img/Background/whitered.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        background-color: #f9f9f9; /* Light gray as a fallback */
+    }
+    .background-image2 {
+        background-image: url('{% static "img/Background/whitedesing.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        background-color: #f9f9f9; /* Light gray as a fallback */
+    }
+    .background-image1 {
+        background-image: url('{% static "img/Background/whitered.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        background-color: #f9f9f9; /* Light gray as a fallback */
+    }
+    .background-image3 {
+        background-image: url('{% static "img/Background/less20.png" %}');
+        background-size: 70%;
+        background-position: center;
+        background-color: #f9f9f9; /* Light gray as a fallback */
+    }
+    .background-image4 {
+        background-image: url('{% static "img/Background/less4.png" %}');
+        background-size: cover;
+        background-position: center;
+        background-color: #f9f9f9; /* Light gray as a fallback */
+    }
+    .background-image5 {
+        background-image: url('{% static "img/Background/less.png" %}');
+        background-size: 50%;
+        background-position: center;
+        background-color: #f9f9f9; /* Light gray as a fallback */
+    }
+    body {
+        font-family: 'Arial', sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+        color: #333;
+    }
+    .unique-container {
+        width: 80%;
+        margin: 20px auto;
+        overflow: hidden;
+    }
+    .unique-content {
+        padding: 20px;
+    }
+    .unique-content h2 {
+        text-align: center;
+        color: #333;
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+    .unique-content .unique-box {
+        background: #fff;
+        border: 1px solid #ccc;
+        padding: 20px;
+        margin: 20px 0;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+    .unique-content .unique-box h3 {
+        text-align: center;
+        color: #444;
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    .unique-box ul {
+        list-style: none;
+        padding: 0;
+    }
+    .unique-box ul li {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+    }
+    .unique-box ul li:last-child {
+        border: none;
+    }
+    .unique-box ul li i {
+        color: #77aaff;
+        margin-right: 10px;
+    }
+    .unique-infographic {
+        text-align: center;
+        margin-top: 20px;
+    }
+    .unique-infographic img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    .unique-highlight {
+        color: #77aaff;
+        font-weight: bold;
+    }
+</style>
+
+<body>
+  <!-- Spinner Start -->
+  <div
+    id="spinner"
+    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+   >
+    <div class="spinner"></div>
+  </div>
+  <!-- Spinner End -->
+
+  <!-- Navbar & Carousel Start -->
+  <div class="container-fluid position-relative p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+      <a href="{% url 'home' %}" class="navbar-brand p-0">
+        <h1 class="m-0">
+          <img
+            class="w-100"
+            src="{% static 'img/logo/png.png' %}"
+            height="100px"
+            width="200px"
+            alt="Image"
+          />
+        </h1>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+          <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >Service</a
+            >
+            <div class="dropdown-menu m-0"> 
+              {% for service in service %}
+              <a href="{% url 'details' service.slug %}" class="dropdown-item">
+                <img
+                  src="{% static 'img/hm.png' %}"
+                  alt="Service Icon"
+                  class="icon"
+                />
+                {{service.category_name}}
+              </a> 
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >Softwear & Solution</a
+            >
+            <div class="dropdown-menu m-0">             
+              {% for softwear in softwear %}
+              <a href="{% url 'details' softwear.slug %}" class="dropdown-item">
+                <img
+                  src="{% static 'img/Cloud.png' %}"
+                  alt="Software Icon"
+                  class="icon"
+                />
+                {{softwear.category_name}}
+              </a> 
+               {% endfor %}
+                            
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >Package</a
+            >
+            <div class="dropdown-menu m-0">
+              {% for package in package %}
+              <a href="{% url 'details' package.slug %}" class="dropdown-item">
+                <img
+                  src="{% static 'img/Cloud.png' %}"
+                  alt="Package Icon"
+                  class="icon"
+                />
+                {{package.category_name}}
+              </a> 
+               {% endfor %} 
+             
+            </div>
+          </div>
+
+          <a href="" class="nav-item nav-link">Portfolio</a>
+          <a href="" class="nav-item nav-link"> Team</a>
+          <a href="" class="nav-item nav-link"> Client</a>
+          <a href="" class="nav-item nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      id="header-carousel"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+    >     
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <video id="video" width="100%" autoplay muted loop>
+            <source src="{% static 'img/adlytic.mp4' %}" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navbar & Carousel End -->
+
+  <!-- Full Screen Search Start -->
+  <div class="modal fade" id="searchModal" tabindex="-1">
+    <div class="modal-dialog modal-fullscreen">
+      <div class="modal-content" style="background: rgba(9, 30, 62, 0.7)">
+        <div class="modal-header border-0">
+          <button
+            type="button"
+            class="btn bg-white btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div
+          class="modal-body d-flex align-items-center justify-content-center"
+        >
+          <div class="input-group" style="max-width: 600px">
+            <input
+              type="text"
+              class="form-control bg-transparent border-danger p-3"
+              placeholder="Type search keyword"
+            />
+            <button class="btn btn-danger px-4">
+              <i class="bi bi-search"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Full Screen Search End -->  
+
+
+ <!-- About Start -->
+ <div
+ class="container-fluid py-3 wow fadeInUp" style="background-color: #f0f0f0;"
+ data-wow-delay="0.1s"
+>
+ <div class="container py-5">
+   <div class="row g-5">
+     <div class="col-lg-7">
+       <div class="section-title position-relative pb-3 mb-5">
+         <h5 class="fw-bold text-danger text-uppercase">About Us</h5>
+         <h1 class="mb-0">Comprehensive Industry Insight</h1>
+       </div>
+       <p class="mb-4" style="text-align: justify">
+         Adlytic Solution is a fast-growing consultancy firm specializing in Call Center Operations, Software Development, and Business Process Outsourcing. 
+         We have started our journey since May 2022. Located in DOHS, Mohakhali, Center of Dhaka, Bangladesh.
+         Adlytic Solution always represented trustworthy and ethical leadership. Our values will help us to sustain and will continue to drive us into the future. 
+
+       </p>
+       <div class="row g-0 mb-3">
+         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+           <h5 class="mb-3">
+             <i class="fa fa-check text-danger me-3"></i>Award Winning
+           </h5>
+           <h5 class="mb-3">
+             <i class="fa fa-check text-danger me-3"></i>Professional Staff
+           </h5>
+         </div>
+         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+           <h5 class="mb-3">
+             <i class="fa fa-check text-danger me-3"></i>24/7 Support
+           </h5>
+           <h5 class="mb-3">
+             <i class="fa fa-check text-danger me-3"></i>Fair Prices
+           </h5>
+         </div>
+       </div>
+       <div
+         class="d-flex align-items-center mb-4 wow fadeIn"
+         data-wow-delay="0.6s"
+       >
+         <div>
+           <a
+             href="{% url 'about' %}"
+             class="btn btn-danger py-md-3 px-md-5 me-3 animated slideInLeft"
+             >See More</a
+           >
+         </div>
+       </div>
+     </div>
+     <div class="col-lg-5" style="min-height: 400px">
+       <div class="position-relative h-100">
+         <img
+           class="position-absolute w-100 h-100 rounded wow zoomIn"
+           data-wow-delay="0.9s"
+           src="{% static 'img/burhan.jpeg' %}" 
+           style="object-fit: cover"
+         />
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+<!-- About End -->
+     
+<!-- Features Start -->
+<div
+ class="container-fluid py-3 wow fadeInUp " style="background-color: #eef9ff;"
+ data-wow-delay="0.1s"
+>
+ <div class="container py-5">
+   <div
+     class="section-title text-center position-relative pb-3 mb-5 mx-auto"
+     style="max-width: 600px"
+   >
+     <h3 class="fw-bold text-danger text-uppercase">Why Choose Us</h3>
+     <h1 class="mb-0">We Are Here to Grow Your Business</h1>
+   </div>
+   <div class="row g-5">
+     <div class="col-lg-4">
+       <div class="row g-5">
+         <div class="col-12 wow zoomIn" data-wow-delay="0.2s">
+           <div
+             class="bg-danger rounded d-flex align-items-center justify-content-center mb-3"
+             style="width: 60px; height: 60px"
+           >
+             <i class="fa fa-cubes text-white"></i>
+           </div>
+           <h4>Best Cloud Service</h4>
+           <p class="mb-0">
+             Experience top-tier cloud performance with seamless scalability and robust security.
+           </p>     
+         </div>
+         <div class="col-12 wow zoomIn" data-wow-delay="0.6s">
+           <div
+             class="bg-danger rounded d-flex align-items-center justify-content-center mb-3"
+             style="width: 60px; height: 60px"
+           >
+             <i class="fa fa-award text-white"></i>    
+           </div>
+           <h4>Economic Service</h4>
+           <p class="mb-0">
+             High-quality solutions at budget-friendly prices, offering the best value for your money.              </p>
+         </div>
+       </div>
+     </div>
+     <div
+       class="col-lg-4 wow zoomIn"
+       data-wow-delay="0.9s"
+       style="min-height: 350px"
+     >
+       <div class="position-relative h-100">
+         <img
+           class="position-absolute w-100 h-100 rounded wow zoomIn"   
+           data-wow-delay="0.1s"
+           src="{% static 'img/group.jpeg' %}"
+           style="object-fit: cover"
+         />
+       </div>
+     </div>
+     <div class="col-lg-4">
+       <div class="row g-5">   
+         <div class="col-12 wow zoomIn" data-wow-delay="0.4s">
+           <div
+             class="bg-danger rounded d-flex align-items-center justify-content-center mb-3"
+             style="width: 60px; height: 60px"
+           >
+             <i class="fa fa-users-cog text-white"></i>
+           </div>
+           <h4>User Friendly Softwear </h4>
+           <p class="mb-0">
+            Enjoy a straightforward and intuitive interface designed use and efficiency.  </p>
+         </div>
+         <div class="col-12 wow zoomIn" data-wow-delay="0.8s">  
+           <div
+             class="bg-danger rounded d-flex align-items-center justify-content-center mb-3"
+             style="width: 60px; height: 60px"
+           >
+             <i class="fa fa-phone-alt text-white"></i>
+           </div>
+           <h4>24/7 Support Exclusive Support</h4>
+           <p class="mb-0">
+           Our exclusive 24/7 support ensures you receive immediate assistance anytime.  </p>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+<!-- Features Start -->
+
+<!-- Service Start -->
+<div
+ class="container-fluid py-3 wow fadeInUp" style="background-color: #f0f0f0;"
+ data-wow-delay="0.1s"
+>
+ <div class="container py-5">
+   <div
+     class="section-title text-center position-relative pb-3 mb-5 mx-auto"
+     style="max-width: 600px"
+   >
+     <h5 class="fw-bold text-danger text-uppercase">Our Services</h5>
+     <h1 class="mb-0">Footwear Today is stands for your Business Success</h1>
+   </div>
+   <div class="row g-5">
+     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
+       <div
+         class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
+       >
+         <div class=" bg-danger service-icon">
+           <i class="fa fa-shield-alt text-white"></i>
+         </div>
+         <h4 class="mb-3"> Call Center Operation</h4>
+         <p class="m-0">
+           Efficient and customer-centric call center operations.
+         </p>
+         <a class="btn btn-lg btn-danger rounded" href="#">
+           <i class="bi bi-arrow-right"></i>
+         </a>
+       </div>
+     </div>
+     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
+       <div
+         class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
+       >
+         <div class="bg-danger service-icon">
+           <i class="fa fa-chart-pie text-white"></i>
+         </div>
+         <h4 class="mb-3"> Social Query Management</h4>
+         <p class="m-0">
+          Efficiently handle social media inquiries with prompt, personalized responses.
+         </p>
+         <a class="btn btn-lg btn-danger rounded" href="#">
+           <i class="bi bi-arrow-right"></i>
+         </a>
+       </div>
+     </div>
+     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
+       <div
+         class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
+       >
+         <div class=" bg-danger service-icon">
+           <i class="fa fa-code text-white"></i>
+         </div>
+         <h4 class="mb-3">Warranty Service</h4>
+         <p class="m-0">
+           Reliable warranty service ensuring peace of mind for all customers.
+         </p>
+         <a class="btn btn-lg btn-danger rounded" href="#">
+           <i class="bi bi-arrow-right"></i>
+         </a>
+       </div>
+     </div>
+     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
+       <div
+         class="service-item bg-light rounded d-flex flex-column align-items-center justify-content-center text-center"
+       >
+         <div class=" bg-danger service-icon">
+           <i class="fab fa-android text-white"></i>
+         </div>
+         <h4 class="mb-3">Softwear & Solution</h4>
+         <p class="m-0">
+           Software solutions streamline operations, enhance efficiency, and drive innovation across industries.
+         </p>
+         <a class="btn btn-lg btn-danger rounded" href="#">
+           <i class="bi bi-arrow-right"></i>
+         </a>
+       </div>
+     </div>
+     <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s" >
+       <div
+         class="position-relative bg-danger rounded h-100 d-flex flex-column align-items-center justify-content-center text-center p-5"
+       >
+         <h3 class="text-white mb-3">Call Us For Quote</h3>
+         <p class="text-white mb-3">
+           Get in touch with us for a personalized quote tailored to your
+           requirements.
+         </p>
+         <h2 class="text-white mb-0">09613882882</h2>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+<!-- Service End -->
+{% comment %} <!-- Blog Start -->
+<div
+ class="container-fluid py-3 wow fadeInUp background-image3"
+ data-wow-delay="0.1s"
+>
+ <div class="container py-5">
+   <div
+     class="section-title text-center position-relative pb-3 mb-5 mx-auto"
+     style="max-width: 600px"
+   >
+     <h3 class="fw-bold text-danger text-uppercase">Latest Blog</h3>
+   </div>
+   <div class="row g-5">
+     {% for blog in blogs %}
+     <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+       <div class="blog-item bg-light rounded overflow-hidden">
+         <div class="blog-img position-relative overflow-hidden">
+           <img class="img-fluid" src="{{ blog.image.url }}" alt="" />
+           <a
+             class="position-absolute top-0 start-0 bg-danger text-white rounded-end mt-5 py-2 px-4"
+             href=""
+             >Latest Blog</a
+           >
+         </div>
+         <div class="p-4">
+           <div class="d-flex mb-3">
+             <small class="me-3"
+               ><i class="far fa-user text-danger me-2"></i
+               >{{blog.author}}</small
+             >
+             <small
+               ><i class="far fa-calendar-alt text-danger me-2"></i
+               >{{blog.publication_date}}</small
+             >
+           </div>
+           <a href="{% url 'blog_details' blog.slug %}" class="read-more bi">
+             <h4 class="mb-3">{{blog.title|truncatewords:5}}</h4>
+           </a>
+           <p>{{ blog.content|truncatewords:18 }}</p>
+           <a
+             href="{% url 'blog_details' blog.slug %}"
+             class="read-more bi bi-arrow-right"
+             >Read more</a
+           >
+         </div>
+       </div>
+     </div>
+     {% endfor %}
+   </div>
+ </div>
+</div>
+<!-- Blog Start --> {% endcomment %}
+
+
+  <!-- Additional Content Start -->
+  <div class="unique-container">
+    <div class="unique-content">
+        <div class="unique-box" style="background: #ffebcd;">
+            <h2>How we can add value</h2>
+            <ul>
+                <li><i class="fas fa-balance-scale"></i> Valuation your values</li>
+                <li><i class="fas fa-map-signs"></i> Navigate your multipurpose demand</li>
+                <li><i class="fas fa-check-circle"></i> Relevant your need & outcomes</li>
+                <li><i class="fas fa-tasks"></i> Control un-expected items</li>
+                <li><i class="fas fa-lightbulb"></i> Bring Reality</li>
+            </ul>
+            <div class="unique-infographic">
+                <img src="" alt="Value Infographic">
+            </div>
+        </div>
+
+        <div class="unique-box" style="background: #e0ffe0;">
+            <h2>Why need upgradation</h2>
+            <ul>
+                <li><i class="fas fa-database"></i> Tomorrows world depend on data science</li>
+                <li><i class="fas fa-chart-line"></i> Your data will be your future resource to be in the market for any type of communication.</li>
+                <li><i class="fas fa-file-alt"></i> Effective Report & Analysis gives a broad idea about expense & customer response & reach.</li>
+                <li><i class="fas fa-envelope"></i> i-Ticket Module, SMS, e-mail & trend analysis via live software shows your present status of operation.</li>
+                <li><i class="fas fa-user-check"></i> Only agent performance & their activity report is not key factor of a contact center</li>
+                <li><i class="fas fa-eye"></i> But when you see the outcome visibility report & DB over agent performance it bring change your decision making in business.</li>
+                <li><i class="fas fa-headset"></i> To be more customer oriented only answering call is not enough</li>
+                <li><i class="fas fa-users"></i> If you create a demographic profile, purchase or complain history, solve & delivery record with notification, it will create company responsiveness & customer loyalty.</li>
+            </ul>
+            <div class="unique-infographic">
+                <img src="/mnt/data/hm2.PNG" alt="Upgradation Infographic">
+            </div>
+        </div>
+
+        <div class="unique-box" style="background: #ffe0e0;">
+            <h2>Why Need Us? If you Decide !</h3>
+            <ul>
+                <li><i class="fas fa-money-bill-wave"></i> Dynamic cost effective solution</li>
+                <li><i class="fas fa-cogs"></i> Simple process to manage user friendly operation</li>
+                <li><i class="fas fa-hand-holding-usd"></i> Cost Restructuring</li>
+                <li><i class="fas fa-chart-pie"></i> Productivity Improvement</li>
+                <li><i class="fas fa-briefcase"></i> Focusing on Core Business</li>
+                <li><i class="fas fa-chart-bar"></i> Increased capability & quality</li>
+                <li><i class="fas fa-users"></i> Skilled work-force</li>
+                <li><i class="fas fa-recycle"></i> Effective utilization of resources</li>
+                <li><i class="fas fa-business-time"></i> New Business involvement</li>
+            </ul>
+            <div class="unique-infographic">
+                <img src="/mnt/data/hm3.PNG" alt="Need Us Infographic">
+            </div>
+        </div>
+    </div>
+</div>
+  <!-- Additional Content End --> 
+   <!-- Quote Start -->
+<div
+ class="container-fluid py-3 wow fadeInUp" style="background-color: #eef9ff;"
+ data-wow-delay="0.1s"
+  >
+  <div class="container py-5">
+   <div class="row g-5">
+     <div class="col-lg-7">
+       <div class="section-title position-relative pb-3 mb-5">
+         <h5 class="fw-bold text-danger text-uppercase">
+           Request A Message
+         </h5>
+         <h1 class="mb-0">Please Feel Free to Contact Us</h1>
+       </div>
+       <div class="row gx-3">
+         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.2s">
+           <h5 class="mb-4">
+             <i class="fa fa-reply text-danger me-3"></i>Reply within 24
+             hours
+           </h5>
+         </div>
+         <div class="col-sm-6 wow zoomIn" data-wow-delay="0.4s">
+           <h5 class="mb-4">
+             <i class="fa fa-phone-alt text-danger me-3"></i>24 hrs
+             telephone support
+           </h5>
+         </div>
+       </div>
+       <p class="mb-4">
+         Welcome to our website! We are dedicated to providing excellent
+         service and support to our customers. Whether you have questions
+         about our services or need assistance, feel free to reach out to us.
+         Our team is here to help you.
+       </p>
+
+       <div
+         class="d-flex align-items-center mt-2 wow zoomIn"
+         data-wow-delay="0.6s"
+       >
+         <div
+           class="bg-danger d-flex align-items-center justify-content-center rounded"
+           style="width: 60px; height: 60px"
+         >
+           <i class="fa fa-phone-alt text-white"></i>
+         </div>
+         <div class="ps-4">
+           <h5 class="mb-2">Call to ask any question</h5>
+           <h4 class="text-danger mb-0">09613882882</h4>
+         </div>
+       </div>
+     </div>
+     <div class="col-lg-5">
+       <div
+         class="bg-danger rounded h-100 d-flex align-items-center p-5 wow zoomIn"
+         data-wow-delay="0.9s"
+       >
+         <form>
+           <div class="row g-3">
+             <div class="col-xl-12">
+               <input
+                 type="text"
+                 class="form-control bg-light border-0"
+                 placeholder="Your Name"
+                 style="height: 55px"
+               />
+             </div>
+             <div class="col-12">
+               <input
+                 type="email"
+                 class="form-control bg-light border-0"
+                 placeholder="Your Email"
+                 style="height: 55px"
+               />
+             </div>
+             <div class="col-12">
+               <textarea
+                 class="form-control bg-light border-0"
+                 rows="3"
+                 placeholder="Message"
+               ></textarea>
+             </div>
+             <div class="col-12">
+               <button class="btn btn-dark w-100 py-3" type="submit">
+                 Request A Quote
+               </button>
+             </div>
+           </div>
+         </form>
+       </div>
+     </div>
+   </div>
+  </div>
+</div>
+<!-- Quote End -->
+  {% endblock %}
+</body>
