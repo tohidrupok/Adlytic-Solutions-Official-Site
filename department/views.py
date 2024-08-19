@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Package , PackageOrder 
+from .models import Category, Package , PackageOrder , Portfolio
 from .forms import PurchaseForm
 
 # Create your views here.
@@ -58,3 +58,7 @@ def buy(request, id):
 
 def about(request):
     return render(request,'about.html')
+
+def portfolio(request):
+    portfolio_items = Portfolio.objects.all()
+    return render(request, 'portfolio.html', {'portfolio_items': portfolio_items})

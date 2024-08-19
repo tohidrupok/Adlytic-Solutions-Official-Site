@@ -1,0 +1,197 @@
+{% extends 'index.html' %}
+{% block body %}
+{% load static %}
+<style>
+/* Existing styles */
+body {
+    font-family: 'Helvetica Neue', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.header {
+    background-color: #333;
+    color: white;
+    padding: 50px 0;
+    text-align: center;
+}
+
+.header h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 18px;
+    margin-top: 0;
+}
+
+.portfolio-section {
+    padding: 40px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.portfolio-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.portfolio-item {
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.portfolio-item .portfolio-title {
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-5px);
+}
+
+.portfolio-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.footer p {
+    margin: 0;
+    font-size: 14px;
+}
+
+/* Additional styles for consistency */
+.portfolio-section h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.portfolio-section p {
+    font-size: 16px;
+    margin-bottom: 40px;
+    color: #666;
+}
+</style>
+
+<body>
+  <!-- Spinner Start -->
+  <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"></div>
+  <!-- Spinner End -->
+
+  <!-- Navbar & Carousel Start -->
+  <div class="container-fluid position-relative p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+      <a href="{% url 'home' %}" class="navbar-brand p-0">
+        <h1 class="m-0">
+          <img class="w-100" src="{% static 'img/logo/png.png' %}" height="100px" width="200px" alt="Image" />
+        </h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+          <a href="#" class="nav-item nav-link active">About</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
+            <div class="dropdown-menu m-0">
+              {% for service in service %}
+              <a href="{% url 'details' service.slug %}" class="dropdown-item">
+                <img src="{% static 'img/hm.png' %}" alt="Certifications and Standards Icon" class="icon" />
+                {{service.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Software & Solution</a>
+            <div class="dropdown-menu m-0">
+              {% for softwear in softwear %}
+              <a href="{% url 'details' softwear.slug %}" class="dropdown-item">
+                <img src="{% static 'img/Cloud.png' %}" alt="Newsletter Subscription Icon" class="icon" />
+                {{softwear.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Package</a>
+            <div class="dropdown-menu m-0">
+              {% for package in packages %}
+              <a href="{% url 'details' package.slug %}" class="dropdown-item">
+                <img src="{% static 'img/Cloud.png' %}" alt="Newsletter Subscription Icon" class="icon" />
+                {{package.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <a href="" class="nav-item nav-link">Portfolio</a>
+          <a href="" class="nav-item nav-link"> Team</a>
+          <a href="" class="nav-item nav-link">Client</a>
+          <a href="" class="nav-item nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="w-100" src="{% static 'img/call3.jpg' %}" alt="Image" />
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+            <div class="p-3" style="max-width: 900px">
+              <h5 class="text-white text-uppercase mb-3 animated slideInDown">Creative & Innovative</h5>
+              <h2 class="display-1 text-white mb-md-4 animated zoomIn">Call centers improve customer service</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navbar & Carousel End -->
+
+  <!-- Portfolio Section Start -->
+  <div class="portfolio-section">
+    <div class="portfolio-container">
+        {% for item in portfolio_items %}
+        <div class="portfolio-item">
+            <a href="{{ item.link }}" target="_blank">
+                <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                <div class="portfolio-title">{{ item.title }}</div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+  <!-- Portfolio Section End -->
+
+{% endblock %}
+</body>

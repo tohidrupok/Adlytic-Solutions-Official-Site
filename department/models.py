@@ -9,7 +9,7 @@ class Name(models.Model):
 class Category(models.Model):
     category_name = models.CharField(max_length=50, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
-    img = models.ImageField(upload_to='category_images/', null=True, blank=True)
+    img = models.ImageField(upload_to='media/category_images/', null=True, blank=True)
     content = models.TextField(null=True, blank=True)
     group = models.ForeignKey(Name, on_delete=models.CASCADE)
     
@@ -45,3 +45,11 @@ class PackageOrder(models.Model):
             return f"{self.name} ordered {self.package.package_name}"
         else:
             return f"{self.name} ordered an unspecified package"
+
+class Portfolio(models.Model):
+    title = models.CharField(max_length=200)
+    image = models.ImageField(upload_to='media/portfolio_images/', null=True, blank=True)
+    link = models.URLField(max_length=200, null=True, blank=True)
+
+    def __str__(self):
+        return self.title
