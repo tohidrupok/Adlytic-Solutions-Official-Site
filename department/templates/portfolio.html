@@ -2,7 +2,7 @@
 {% block body %}
 {% load static %}
 <style>
-    /* Existing styles */
+    
     body {
         font-family: 'Helvetica Neue', sans-serif;
         margin: 0;
@@ -10,7 +10,10 @@
         background-color: #f9f9f9;
         color: #333;
     }
-
+    .icon {
+        width: 30px;
+        height: 30px;
+    }
     .header {
         background-color: #333;
         color: white;
@@ -87,7 +90,7 @@
         font-size: 14px;
     }
 
-    /* Additional styles for consistency */
+    
     .portfolio-section h2 {
         font-size: 32px;
         margin-bottom: 20px;
@@ -99,41 +102,41 @@
         margin-bottom: 40px;
         color: #666;
     } 
-    /* Signal icon styles */
-.portfolio-title {
-    position: relative;
-    display: inline-block;
-}
-
-.link-signal {
-    display: inline-block;
-    font-size: 20px;
-    margin-left: 8px;
-    color: #007BFF; /* Initial color of the link icon */
-    animation: pulse 1.5s ease infinite;
-}
-
-/* Pulse animation */
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-        opacity: 1;
+    
+    .portfolio-title {
+        position: relative;
+        display: inline-block;
     }
-    50% {
+
+    .link-signal {
+        display: inline-block;
+        font-size: 20px;
+        margin-left: 8px;
+        color: #007BFF; /* Initial color of the link icon */
+        animation: pulse 1.5s ease infinite;
+    }
+
+    /* Pulse animation */
+    @keyframes pulse {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        50% {
+            transform: scale(1.2);
+            opacity: 0.7;
+        }
+        100% {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+
+    .portfolio-item:hover .link-signal {
+        color: #0056b3; /* Slightly darker blue on hover */
         transform: scale(1.2);
-        opacity: 0.7;
     }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* Hover effect for the link icon */
-.portfolio-item:hover .link-signal {
-    color: #0056b3; /* Slightly darker blue on hover */
-    transform: scale(1.2);
-}
 
 </style>
 

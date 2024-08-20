@@ -57,8 +57,23 @@ def buy(request, id):
      
 
 def about(request):
-    return render(request,'about.html')
+    service = Category.objects.filter(group__part="service") 
+    softwear = Category.objects.filter(group__part="softwear_solution")
+    packages = Category.objects.filter(group__part="package")
+
+    context = {'success': True, 'id': id,'service': service, 'softwear': softwear, 'packages': packages}  
+
+    return render(request,'about.html',context)
 
 def portfolio(request):
+
     portfolio_items = Portfolio.objects.all()
-    return render(request, 'portfolio.html', {'portfolio_items': portfolio_items})
+
+    service = Category.objects.filter(group__part="service") 
+    softwear = Category.objects.filter(group__part="softwear_solution")
+    packages = Category.objects.filter(group__part="package")
+
+    context = {'portfolio_items': portfolio_items,'success': True, 'id': id,'service': service, 'softwear': softwear, 'packages': packages}   
+
+    
+    return render(request, 'portfolio.html', context)
