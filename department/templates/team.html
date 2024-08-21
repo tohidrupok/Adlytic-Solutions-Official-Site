@@ -1,0 +1,135 @@
+{% extends 'index.html' %}
+{% block body %}
+{% load static %}
+<style>
+    
+    body {
+        font-family: 'Helvetica Neue', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+    .icon {
+        width: 30px;
+        height: 30px;
+    }
+    
+
+</style>
+
+<body>
+  <!-- Spinner Start -->
+  <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"></div>
+  <!-- Spinner End -->
+
+  <!-- Navbar & Carousel Start -->
+  <div class="container-fluid position-relative p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+      <a href="{% url 'home' %}" class="navbar-brand p-0">
+        <h1 class="m-0">
+          <img class="w-100" src="{% static 'img/logo/png.png' %}" height="100px" width="200px" alt="Image" />
+        </h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+          <a href="#" class="nav-item nav-link active">About</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
+            <div class="dropdown-menu m-0">
+              {% for service in service %}
+              <a href="{% url 'details' service.slug %}" class="dropdown-item">
+                <img src="{% static 'img/hm.png' %}" alt="Certifications and Standards Icon" class="icon" />
+                {{service.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Software & Solution</a>
+            <div class="dropdown-menu m-0">
+              {% for softwear in softwear %}
+              <a href="{% url 'details' softwear.slug %}" class="dropdown-item">
+                <img src="{% static 'img/Cloud.png' %}" alt="Newsletter Subscription Icon" class="icon" />
+                {{softwear.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Package</a>
+            <div class="dropdown-menu m-0">
+              {% for package in packages %}
+              <a href="{% url 'details' package.slug %}" class="dropdown-item">
+                <img src="{% static 'img/Cloud.png' %}" alt="Newsletter Subscription Icon" class="icon" />
+                {{package.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <a href="" class="nav-item nav-link">Portfolio</a>
+          <a href="" class="nav-item nav-link"> Team</a>
+          <a href="" class="nav-item nav-link">Client</a>
+          <a href="" class="nav-item nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="w-100" src="{% static 'img/call3.jpg' %}" alt="Image" />
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+            <div class="p-3" style="max-width: 900px">
+              <h5 class="text-white text-uppercase mb-3 animated slideInDown">Creative & Innovative</h5>
+              <h2 class="display-1 text-white mb-md-4 animated zoomIn">Call centers improve customer service</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navbar & Carousel End -->
+
+<!-- Team Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container py-5">
+        <div class="section-title text-center position-relative pb-3 mb-5 mx-auto" style="max-width: 600px">
+            <h5 class="fw-bold text-primary text-uppercase">Adlytic solution</h5>
+            <h1 class="mb-0">Our Team Members</h1>
+        </div>
+        <div class="row g-5">
+            {% for leader in team_members %}
+            <div class="col-lg-4 wow slideInUp" data-wow-delay="{% cycle '0.3s' '0.6s' '0.9s' %}">
+                <div class="team-item bg-light rounded overflow-hidden"> 
+                  
+                    <div class="team-img position-relative overflow-hidden">
+                        <img class="img-fluid w-100" src="{{ leader.image.url }}" alt="{{ leader.name }}">
+                        <!-- If you have social media links for each leader, you can add them here -->
+                        <div class="team-social">
+                          <a class="btn btn-lg btn-primary btn-lg-square rounded" href="{{ leader.facebook }}"
+                            ><i class="fab fa-facebook-f fw-normal"></i
+                          ></a>
+                          <a class="btn btn-lg btn-primary btn-lg-square rounded" href="{{ leader.linkedin }}"
+                            ><i class="fab fa-linkedin-in fw-normal"></i
+                          ></a>
+                        </div>
+                    </div>
+                    <div class="text-center py-4">
+                        <h4  class="text-primary"><a href="">{{ leader.name }}</a></h4>
+                        <p class="text-uppercase m-0">{{ leader.title }}</p>
+                    </div> 
+                  
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+{% endblock %}
+</body>

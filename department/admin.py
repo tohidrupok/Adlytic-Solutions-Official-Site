@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, Package , Name, PackageOrder , Portfolio
+from .models import Category, Package , Name, PackageOrder , Portfolio, TeamMember
 
 
 class CategoryAdmin(admin.ModelAdmin): 
@@ -21,6 +21,7 @@ class PackageOrderAdmin(admin.ModelAdmin):
 
 admin.site.register(Name)
 admin.site.register(Portfolio)
+admin.site.register(TeamMember)
 admin.site.register(PackageOrder,PackageOrderAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Package, PackageAdmin) 

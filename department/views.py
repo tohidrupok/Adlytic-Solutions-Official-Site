@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Package , PackageOrder , Portfolio
+from .models import Category, Package , PackageOrder , Portfolio , TeamMember
 from .forms import PurchaseForm
 
 # Create your views here.
@@ -77,3 +77,17 @@ def portfolio(request):
 
     
     return render(request, 'portfolio.html', context)
+
+
+def team_member(request):
+
+    team_members = TeamMember.objects.all()
+
+    service = Category.objects.filter(group__part="service") 
+    softwear = Category.objects.filter(group__part="softwear_solution")
+    packages = Category.objects.filter(group__part="package")
+
+    context = {'team_members': team_members,'success': True, 'id': id,'service': service, 'softwear': softwear, 'packages': packages}   
+
+    
+    return render(request, 'team.html', context)

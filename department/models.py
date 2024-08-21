@@ -52,4 +52,14 @@ class Portfolio(models.Model):
     link = models.URLField(max_length=200, null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return self.title 
+    
+class TeamMember(models.Model):
+    name = models.CharField(max_length=100)
+    title = models.CharField(max_length=100)
+    facebook = models.URLField(max_length=200, blank=True, null=True)
+    linkedin = models.URLField(max_length=200, blank=True, null=True)
+    image = models.ImageField(upload_to='Team_member/', null=True, blank=True)
+
+    def __str__(self):
+        return self.name
