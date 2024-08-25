@@ -1,0 +1,156 @@
+{% extends 'index.html' %}
+{% block body %}
+{% load static %}
+<style>
+    body {
+        font-family: 'Helvetica Neue', sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    .icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .clients-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px; /* Reduced gap to accommodate smaller cards */
+        justify-content: center;
+        padding: 40px 0;
+        background-color: #fff;
+    }
+
+    .client-card {
+        width: 200px; 
+        padding: 15px;
+        border: 2px solid #ddd;
+        border-radius: 5px; /* Slightly rounded corners */
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        
+    }
+
+    .client-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        background-color: #e9ecef;
+    }
+
+    .client-image {
+        width: 100%; /* Full width */
+        height: auto;
+        margin-bottom: 10px; /* Reduced margin */
+        transition: opacity 0.3s ease;
+    }
+
+    .client-name {
+        font-size: 1.2em; /* Slightly smaller font size */
+        color: #333;
+        transition: color 0.3s ease;
+    }
+
+    .client-card:hover .client-name {
+        color: #007bff;
+    }
+
+    .client-card:hover .client-image {
+        opacity: 0.9;
+    }
+</style>
+
+<body>
+  <!-- Spinner Start -->
+  <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"></div>
+  <!-- Spinner End -->
+
+  <!-- Navbar & Carousel Start -->
+  <div class="container-fluid position-relative p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+      <a href="{% url 'home' %}" class="navbar-brand p-0">
+        <h1 class="m-0">
+          <img class="w-100" src="{% static 'img/logo/png.png' %}" height="100px" width="200px" alt="Image" />
+        </h1>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+          <a href="#" class="nav-item nav-link active">About</a>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
+            <div class="dropdown-menu m-0">
+              {% for service in service %}
+              <a href="{% url 'details' service.slug %}" class="dropdown-item">
+                <img src="{% static 'img/hm.png' %}" alt="Certifications and Standards Icon" class="icon" />
+                {{service.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Software & Solution</a>
+            <div class="dropdown-menu m-0">
+              {% for softwear in softwear %}
+              <a href="{% url 'details' softwear.slug %}" class="dropdown-item">
+                <img src="{% static 'img/Cloud.png' %}" alt="Newsletter Subscription Icon" class="icon" />
+                {{softwear.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Package</a>
+            <div class="dropdown-menu m-0">
+              {% for package in packages %}
+              <a href="{% url 'details' package.slug %}" class="dropdown-item">
+                <img src="{% static 'img/Cloud.png' %}" alt="Newsletter Subscription Icon" class="icon" />
+                {{package.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <a href="" class="nav-item nav-link">Portfolio</a>
+          <a href="" class="nav-item nav-link">Team</a>
+          <a href="" class="nav-item nav-link">Client</a>
+          <a href="" class="nav-item nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="w-100" src="{% static 'img/call3.jpg' %}" alt="Image" />
+          <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+            <div class="p-3" style="max-width: 900px">
+              <h5 class="text-white text-uppercase mb-3 animated slideInDown">Creative & Innovative</h5>
+              <h2 class="display-1 text-white mb-md-4 animated zoomIn">Call centers improve customer service</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navbar & Carousel End -->
+
+  <!-- Client Section Start -->
+  <div class="clients-container">
+    {% for client in clients %}
+    <div class="client-card">
+        {% if client.image %}
+        <img src="{{ client.image.url }}" alt="{{ client.name }}" class="client-image">
+        {% endif %}
+        <h3 class="client-name">{{ client.name }}</h3>
+    </div>
+    {% endfor %}
+  </div>
+  <!-- Client Section End -->
+
+{% endblock %}
+</body>

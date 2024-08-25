@@ -62,4 +62,21 @@ class TeamMember(models.Model):
     image = models.ImageField(upload_to='Team_member/', null=True, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.name 
+
+class Client(models.Model):
+    name = models.CharField(max_length = 100)
+    image = models.ImageField(upload_to='Client/', null=True, blank=True)
+    
+
+
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=200)
+    message = models.TextField()
+
+    def __str__(self):
+        return self.name 
+    
+    

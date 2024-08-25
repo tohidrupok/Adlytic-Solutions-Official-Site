@@ -1,6 +1,9 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Package , PackageOrder , Portfolio , TeamMember
-from .forms import PurchaseForm
+from .models import Category, Package , PackageOrder , Portfolio , TeamMember , Client
+from .forms import PurchaseForm , ContactForm
+import logging 
+from django.core.mail import send_mail
+from django.conf import settings
 
 # Create your views here.
 def home(request):  
@@ -91,3 +94,71 @@ def team_member(request):
 
     
     return render(request, 'team.html', context)
+
+def client(request):
+
+    clients = Client.objects.all()
+
+    service = Category.objects.filter(group__part="service") 
+    softwear = Category.objects.filter(group__part="softwear_solution")
+    packages = Category.objects.filter(group__part="package")
+
+    context = {'clients': clients,'success': True, 'id': id,'service': service, 'softwear': softwear, 'packages': packages}   
+
+    
+    return render(request, 'client.html', context)
+
+
+
+logger = logging.getLogger(__name__)
+def my_contact(request):
+
+    form = ContactForm()
+    success = False
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            success = True
+            
+            # Send email to admin
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            from_email = form.cleaned_data['email']  # Email provided by the user
+            name = form.cleaned_data['name']
+            admin_email = settings.DEFAULT_FROM_EMAIL  # Admin email defined in settings 
+
+
+            try:
+                send_mail(
+                    f"New contact form submission: {subject}",
+                    f"Name: {name}\nEmail: {from_email}\n\nMessage:\n{message}",
+                    admin_email,
+                    [admin_email],
+                    fail_silently=False,
+                )
+            except Exception as e:
+                logger.error(f"Error sending email from {from_email} to {admin_email}: {e}")
+                success = False
+            
+
+
+
+            # try:
+            #     send_mail(
+            #         f"New contact form submission: {subject}",
+            #         f"Name: {name}\nEmail: {from_email}\n\nMessage:\n{message}",
+            #         admin_email,  # Sender email, as per settings
+            #         [admin_email],  # Receiver email, the admin's email
+            #         fail_silently=False,
+            #     )
+               
+            # except Exception as e:
+            #     logger.error(f"Error sending email: {e}")
+            #     success = False
+            
+            form = ContactForm()  # Clear the form after successful submission
+
+    return render(request, 'contact.html', {'form': form, 'success': success}) 
+    
+
