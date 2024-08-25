@@ -124,9 +124,9 @@ def my_contact(request):
             # Send email to admin
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
-            from_email = form.cleaned_data['email']  # Email provided by the user
+            from_email = form.cleaned_data['email']  
             name = form.cleaned_data['name']
-            admin_email = settings.DEFAULT_FROM_EMAIL  # Admin email defined in settings 
+            admin_email = settings.DEFAULT_FROM_EMAIL  
 
 
             try:
@@ -141,24 +141,15 @@ def my_contact(request):
                 logger.error(f"Error sending email from {from_email} to {admin_email}: {e}")
                 success = False
             
+            form = ContactForm()  
+    
+    service = Category.objects.filter(group__part="service") 
+    softwear = Category.objects.filter(group__part="softwear_solution")
+    packages = Category.objects.filter(group__part="package") 
+    
 
+    context = {'success': success,'form': form, 'id': id,'service': service, 'softwear': softwear, 'packages': packages}   
 
-
-            # try:
-            #     send_mail(
-            #         f"New contact form submission: {subject}",
-            #         f"Name: {name}\nEmail: {from_email}\n\nMessage:\n{message}",
-            #         admin_email,  # Sender email, as per settings
-            #         [admin_email],  # Receiver email, the admin's email
-            #         fail_silently=False,
-            #     )
-               
-            # except Exception as e:
-            #     logger.error(f"Error sending email: {e}")
-            #     success = False
-            
-            form = ContactForm()  # Clear the form after successful submission
-
-    return render(request, 'contact.html', {'form': form, 'success': success}) 
+    return render(request, 'contact.html', context) 
     
 
