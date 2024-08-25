@@ -118,7 +118,78 @@
     .unique-highlight {
         color: #77aaff;
         font-weight: bold;
+    } 
+
+
+      .world-class-details-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #eaeff7;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
+
+    .world-class-section-title {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .world-class-details-split {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .world-class-details-column {
+      width: 48%;
+      
+    }
+
+    .world-class-detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 10px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .world-class-detail-name {
+      font-size: 18px;
+      color: #555;
+    }
+
+    .world-class-detail-status {
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+      font-weight: bold;
+      color: #ffffff;
+      padding: 5px 10px;
+      border-radius: 4px;
+    }
+
+    .world-class-live-status {
+      background-color: #28a745; /* Green for Live status */
+    }
+
+    .world-class-available-status {
+      background-color: #007bff; /* Blue for Available status */
+    }
+
+    .world-class-neutral-status {
+      background-color: #ffc107; /* Yellow for Neutral status */
+    }
+
+    .world-class-detail-item:last-child {
+      margin-bottom: 0;
+    }
+    
 </style>
 
 <body>
@@ -274,13 +345,12 @@
   </div>
   <!-- Full Screen Search End -->  
 
-
  <!-- About Start -->
  <div
- class="container-fluid py-3 wow fadeInUp" style="background-color: #f0f0f0;"
- data-wow-delay="0.1s"
->
- <div class="container py-5">
+    class="container-fluid py-3 wow fadeInUp" style="background-color: #f0f0f0;"
+    data-wow-delay="0.1s"
+    >
+   <div class="container py-5">
    <div class="row g-5">
      <div class="col-lg-7">
        <div class="section-title position-relative pb-3 mb-5">
@@ -335,15 +405,15 @@
        </div>
      </div>
    </div>
- </div>
+  </div>
 </div>
 <!-- About End -->
      
 <!-- Features Start -->
-<div
+<div 
  class="container-fluid py-3 wow fadeInUp " style="background-color: #eef9ff;"
  data-wow-delay="0.1s"
->
+ >
  <div class="container py-5">
    <div
      class="section-title text-center position-relative pb-3 mb-5 mx-auto"
@@ -423,12 +493,87 @@
  </div>
 </div>
 <!-- Features Start -->
+<!-- our data Start --> 
+<div class="world-class-details-container">
+  <h2 class="world-class-section-title">Adlytic Solutions Status </h2>
+  <div class="world-class-details-split">
+    <div class="world-class-details-column">
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Cloud Call Center Software Solutions</span>
+        <span class="world-class-detail-status world-class-live-status">Live</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Cloud Business Management Software with POS</span>
+        <span class="world-class-detail-status world-class-live-status">Live</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">E-Commerce Platform Development</span>
+        <span class="world-class-detail-status world-class-live-status">Live</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Website Development</span>
+        <span class="world-class-detail-status world-class-available-status">Available</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Cloud Warranty Management Solutions</span>
+        <span class="world-class-detail-status world-class-live-status">Live</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">School Management Solution</span>
+        <span class="world-class-detail-status world-class-live-status">Live</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Cloud Digital Queries Management Tracker</span>
+        <span class="world-class-detail-status world-class-live-status">Live</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Virtual Sales Solutions</span>
+        <span class="world-class-detail-status world-class-available-status">Available</span>
+      </div>
+    </div>
+    <div class="world-class-details-column">
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Service Duration</span>
+        <span class="world-class-detail-status world-class-neutral-status">24CX7</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Service Type</span>
+        <span class="world-class-detail-status world-class-neutral-status">Premesis & Hosted</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Software & Solution (CRM & Ticketing)</span>
+        <span class="world-class-detail-status world-class-neutral-status">Own</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Report & Analysis</span>
+        <span class="world-class-detail-status world-class-available-status">Available</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Live Monitoring</span>
+        <span class="world-class-detail-status world-class-available-status">Available</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Connectivity (ISP & GSM)</span>
+        <span class="world-class-detail-status world-class-available-status">Available</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">Server</span>
+        <span class="world-class-detail-status world-class-available-status">Available</span>
+      </div>
+      <div class="world-class-detail-item">
+        <span class="world-class-detail-name">IVR Facilities</span>
+        <span class="world-class-detail-status world-class-available-status">Available</span>
+      </div>
+    </div>
+  </div>
+</div>
 
+ <!-- our data  end --> 
 <!-- Service Start -->
 <div
  class="container-fluid py-3 wow fadeInUp" style="background-color: #f0f0f0;"
  data-wow-delay="0.1s"
->
+ >
  <div class="container py-5">
    <div
      class="section-title text-center position-relative pb-3 mb-5 mx-auto"
@@ -516,7 +661,7 @@
    </div>
  </div>
 </div>
-<!-- Service End -->
+<!-- Service End --> 
  {% comment %} <!-- Blog Start -->
 <div
  class="container-fluid py-3 wow fadeInUp background-image3"
