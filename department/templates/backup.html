@@ -1,0 +1,602 @@
+{% extends 'index.html' %} {% block body %} {% load static %}
+<style>
+  .icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .custom-body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0px;
+    line-height: 1.6;
+    color: #333;
+  }
+  header {
+    background-color: #0077b6;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  h2 {
+    background-color: #ed1c24;
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 2px #333;
+    transition: transform 0.3s ease;
+  }
+  h2:hover {
+    transform: scale(1.05);
+  }
+  ul,
+  p {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  ul:hover,
+  p:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  th,
+  td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    transition: background-color 0.3s ease;
+  }
+  th {
+    background-color: #00b4d8;
+    color: white;
+  }
+  tr:hover td {
+    background-color: #caf0f8;
+  }
+  .section {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  .section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .sub-section {
+    margin-left: 20px;
+    font-style: italic;
+  }
+  .image-container {
+    text-align: center;
+    margin-top: 20px;
+  }
+  .responsive-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  .responsive-image:hover {
+    transform: scale(1.05);
+  }
+  .image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .grid-image {
+    width: calc(25% - 10px); /* Adjust width for 4 images with gaps */
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover; /* Ensures the images cover their containers */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .grid-image:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  @media (max-width: 768px) {
+    .grid-image {
+      width: calc(50% - 10px); /* Stack two images per row on smaller screens */
+    }
+  }
+  /* Add simple animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .section,
+  .image-container,
+  table,
+  h2 {
+    animation: fadeIn 1s ease-in-out;
+  }
+</style>
+<body>
+  <!-- Spinner Start -->
+  <div
+    id="spinner"
+    class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center"
+  ></div>
+  <!-- Spinner End -->
+
+  <!-- Navbar & Carousel Start -->
+  <div class="container-fluid position-relative p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
+      <a href="{% url 'home' %}" class="navbar-brand p-0">
+        <h1 class="m-0">
+          <img
+            class="w-100"
+            src="{% static 'img/logo/png.png' %}"
+            height="100px"
+            width="200px"
+            alt="Image"
+          />
+        </h1>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="fa fa-bars"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="navbar-nav ms-auto py-0">
+          <a href="{% url 'about' %}" class="nav-item nav-link active">About</a>
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >Service</a
+            >
+            <div class="dropdown-menu m-0">
+              {% for service in service %}
+              <a href="{% url 'service'%}" class="dropdown-item">
+                <img
+                  src="{% static 'img/hm.png' %}"
+                  alt="Service Icon"
+                  class="icon"
+                />
+                {{service.name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >Software & Solution</a
+            >
+            <div class="dropdown-menu m-0">
+              {% for softwear in softwear %}
+              <a href="{% url 'details' softwear.slug %}" class="dropdown-item">
+                <img
+                  src="{% static 'img/Cloud.png' %}"
+                  alt="Newsletter Subscription Icon"
+                  class="icon"
+                />
+                {{softwear.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="nav-item dropdown">
+            <a
+              href="#"
+              class="nav-link dropdown-toggle"
+              data-bs-toggle="dropdown"
+              >Package</a
+            >
+            <div class="dropdown-menu m-0">
+              {% for package in packages %}
+              <a href="{% url 'details' package.slug %}" class="dropdown-item">
+                <img
+                  src="{% static 'img/Cloud.png' %}"
+                  alt="Newsletter Subscription Icon"
+                  class="icon"
+                />
+                {{package.category_name}}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <a href="{% url 'portfolio' %}" class="nav-item nav-link"
+            >Portfolio</a
+          >
+          <a href="{% url 'team' %}" class="nav-item nav-link"> Team</a>
+          <a href="{% url 'client' %}" class="nav-item nav-link"> Client</a>
+          <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>
+        </div>
+      </div>
+    </nav>
+
+    <div
+      id="header-carousel"
+      class="carousel slide carousel-fade"
+      data-bs-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="w-100" src="{% static 'img/hm.png' %}" alt="Image" />
+          <div
+            class="carousel-caption d-flex flex-column align-items-center justify-content-center"
+          >
+            <div class="p-3" style="max-width: 900px">
+              <h5 class="text-white text-uppercase mb-3 animated slideInDown">
+                Creative & Innovative
+              </h5>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Navbar & Carousel End -->
+   <br><br><br>
+  <div style="padding: 55px !important;"> 
+   <body class="custom-body">
+    <h2>Call Center Solutions Status</h2>
+    <ul>
+      <li>Cloud Call Center Solutions</li>
+      <li>Cloud CRM</li>
+      <li>Cloud i-Ticket Software</li>
+      <li>Report & Analytics</li>
+      <li>Operation Excellence</li>
+    </ul>
+    <table>
+      <thead>
+        <tr>
+          <th>Sl. No</th>
+          <th>Particulars</th>
+          <th>Status</th>
+          <th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>Dialer</td>
+          <td>Available</td>
+          <td>Simple call dialer software</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>IVR</td>
+          <td>Available</td>
+          <td>Customize IVR (Interactive voice record) as per company needs</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>CRM</td>
+          <td>Available</td>
+          <td>
+            CRM will help to create a database of customers based on queries,
+            complaints & sales
+          </td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>i-Ticket</td>
+          <td>Available</td>
+          <td>
+            Save service center time & get pre-notification about complaints
+          </td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Caller Record</td>
+          <td>Available</td>
+          <td>
+            Currently, only Call history is available, but no customer data
+          </td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>SMS Module</td>
+          <td>Available</td>
+          <td>
+            Customer can get SMS notifications after making a complaint with
+            T-ID
+          </td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>E-mail Module</td>
+          <td>Available</td>
+          <td>
+            Customer can get email notifications after making a complaint with
+            T-ID (If required)
+          </td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Integration with service system</td>
+          <td>Available</td>
+          <td>
+            Agent can easily provide updates about service products & other
+            information
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Image Start -->
+    <div class="section">
+      <h2>Call Management Process</h2>
+      <div class="image-container">
+        <img
+          src="{% static 'img/img1.PNG' %}"
+          alt="Description of the image"
+          class="responsive-image"
+        />
+      </div>
+    </div>
+
+    <!-- Image End -->
+
+    <div class="section">
+      <h2>Multi-Channel CRM Solution</h2>
+      <ul>
+        <li>
+          Multi Channel dynamic CRM (Customer Relationship Management) is a
+          combined versatile solution from Adlytic Solutions.
+        </li>
+        <li>Customer GQ prompt reply helps CU to take decision.</li>
+        <li>CRM helps to profiling customer data product category wise.</li>
+        <li>CRM help to display a single window to support customer.</li>
+        <li>VOC making more easy.</li>
+        <li>
+          Tracking customer as per history, area, gender, product & community
+          wise etc.
+        </li>
+        <li>CRM Database is turned into a company resource with profit.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Web Development</h2>
+      <ul>
+        <li>Website Development</li>
+        <li>Dynamic & Interactive site</li>
+        <li>E-Commerce</li>
+        <li>Educational Institute & School</li>
+        <li>Hosting</li>
+      </ul>
+      <div class="sub-section">
+        <p>• Platform – WordPress, PHP, Laravel & Python</p>
+        <p>
+          • Language – PHP, JavaScript, AJAX, Laravel & Python (HTML, CSS,
+          Bootstrap)
+        </p>
+        <p>• Framework - Laravel & Python (Django)</p>
+        <p>• Update, Maintenance & Repair</p>
+        <p>• 24X7 Support</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Software Development</h2>
+      <ul>
+        <li>Warranty Management</li>
+        <li>POS & Business Management</li>
+        <li>Small ERP</li>
+        <li>School Management Solution</li>
+        <li>IP-PABX & Telephony Solution</li>
+      </ul>
+      <div class="sub-section">
+        <p>• Development of Multi-purpose process management software.</p>
+        <p>
+          • Languages – PHP, JavaScript, AJAX, Laravel & Python (HTML, CSS,
+          Bootstrap)
+        </p>
+        <p>• Database - My-SQL, My-SQLi, SQLite</p>
+        <p>• Framework - Laravel & Python (Django)</p>
+        <p>• Update, Maintenance & Repair</p>
+        <p>• 24X7 Support</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Virtual Service</h2>
+      <ul>
+        <li>VSR (Virtual Sales Representative)</li>
+        <li>Tele-marketing</li>
+        <li>Voice Broadcasting</li>
+        <li>SMS Marketing</li>
+        <li>Cold Call</li>
+      </ul>
+      <div class="sub-section">
+        <p>• SR (Sales Representative) via online</p>
+        <p>• Route-wise shop visit with maximum capabilities</p>
+        <p>• Helps to reduce physical SR for saving cost</p>
+        <p>• Helps to reach untouchable sites where SRs are unable to reach</p>
+        <p>• Transforming into a Digital process</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Telemarketing & Tele-Sales</h2>
+      <div class="sub-section">
+        <p>• Cost-effective process to reach target groups via phone calls.</p>
+        <p>
+          • Calls based on a specific area customer database for Product
+          Marketing & Sales.
+        </p>
+        <p>• Product introduction & promotion.</p>
+        <p>• Category-wise promotion (Product, Area & Cluster Package).</p>
+        <p>• Hunting for New Customers.</p>
+        <p>• Generating Sales.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Voice Broadcasting</h2>
+      <div class="sub-section">
+        <p>• Voice Message</p>
+        <p>• Voice Survey using codes (In voice MSG press 1 or 2)</p>
+        <p>• Broadcast your advertisement or message to the desired group.</p>
+        <p>• Single Voice for Multiple Target Groups</p>
+        <p>• Service Rating using codes (In voice MSG press 1 or 2)</p>
+        <p>• Human-less interaction for real-time feedback.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>IT Consultant & Support</h2>
+      <div class="sub-section">
+        <p>• IT (MIS) Support for Office & Business</p>
+        <p>• Provide Consultancy for IT (Technology & Technical)</p>
+        <p>• Remote & On-premises support</p>
+        <p>• Cost-effective service</p>
+        <p>• 24X7 Support.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>Digital Queries Management & Tracker</h2>
+      <div class="sub-section">
+        <p>• Facebook</p>
+        <p>• Instagram</p>
+        <p>• WhatsApp</p>
+        <p>• Web Chat & e-mail.</p>
+        <p>
+          • Managing Social Media Platform, Keeping engagement record & tracking
+          comment nature.
+        </p>
+        <p>• Helps to take future decisions.</p>
+      </div>
+    </div>
+    <!-- Image Start -->
+    <div class="section">
+      <h2>Digital Queries Management & Tracker</h2>
+      <div class="image-container">
+        <img
+          src="{% static 'img/img2.PNG' %}"
+          alt="Description of the image"
+          class="responsive-image"
+        />
+      </div>
+    </div>
+
+    <!-- Image End -->
+
+    <div class="section">
+      <h2>Notification Management Software</h2>
+      <div class="sub-section">
+        <p>
+          • Low-cost promotion tools based on customer agreement & subscription.
+        </p>
+        <p>
+          • Reach to potential customers & target groups via the web with
+          minimal cost.
+        </p>
+        <p>
+          • Used for OTT platform, FTP Platform, Online Sales Portal, Online
+          News Portal, Website & Service Portal.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>IP-PABX Solution</h2>
+      <div class="sub-section">
+        <p>• Connect your office phone & helpline on the same platform.</p>
+        <p>• IP Phone for mass communication.</p>
+        <p>
+          • Cost-effective communication channel for inter-company
+          communication.
+        </p>
+        <p>• Tracks & records voice for future action.</p>
+        <p>• Self-Management Telephony system.</p>
+      </div>
+    </div>
+
+    <!-- Image Start -->
+    <div class="section">
+      <h2>Call Management Process</h2>
+      <div class="image-container">
+        <img
+          src="{% static 'img/img1.PNG' %}"
+          alt="Description of the image"
+          class="responsive-image"
+        />
+      </div>
+    </div>
+
+    <!-- Image End -->
+
+    <!-- Image Start -->
+    <div class="section">
+      <h2>Calling Software Demo</h2>
+      <div class="image-container">
+        <img
+          src="{% static 'img/img3.PNG' %}"
+          alt="Description of the image"
+          class="responsive-image"
+        />
+      </div>
+    </div>
+
+    <!-- Image End -->
+    <div class="section">
+      <h2>i-Ticket Software Demo</h2>
+      <div class="image-grid">
+        <img
+          src="{% static 'img/Picture6.png' %}"
+          alt="Description of Image 1"
+          class="grid-image"
+        />
+        <img
+          src="{% static 'img/Picture7.png' %}"
+          alt="Description of Image 2"
+          class="grid-image"
+        />
+        <img
+          src="{% static 'img/Picture8.png' %}"
+          alt="Description of Image 2"
+          class="grid-image"
+        />
+      </div>
+    </div>
+  </body>   
+  </div>
+  {% endblock %}
+</body>

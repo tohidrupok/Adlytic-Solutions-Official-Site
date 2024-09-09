@@ -10,5 +10,6 @@ urlpatterns = [
    path('team/', views.team_member, name='team'),
    path('clients/', views.client, name='client'),
    path('contact/', views.my_contact, name='contact'),
+   path('service/', views.service, name='service'),
     
 ] 

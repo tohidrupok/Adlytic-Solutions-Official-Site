@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import Category, Package , PackageOrder , Portfolio , TeamMember , Client
+from .models import Category, Package , PackageOrder , Portfolio , TeamMember , Client, Service
 from .forms import PurchaseForm , ContactForm
 import logging 
 from django.core.mail import send_mail
@@ -7,7 +7,7 @@ from django.conf import settings
 
 # Create your views here.
 def home(request):  
-    service = Category.objects.filter(group__part="service") 
+    service = Service.objects.all()
     softwear = Category.objects.filter(group__part="softwear_solution")
     package = Category.objects.filter(group__part="package")
 
@@ -24,7 +24,7 @@ def details(request, category_slug=None):
         
         all_pakg = Package.objects.filter(category=category) 
 
-    service = Category.objects.filter(group__part="service") 
+    service = Service.objects.all()
     softwear = Category.objects.filter(group__part="softwear_solution")
     package = Category.objects.filter(group__part="package")
 
@@ -36,7 +36,7 @@ def details(request, category_slug=None):
 
 def buy(request, id):
 
-    service = Category.objects.filter(group__part="service") 
+    service = Service.objects.all()
     softwear = Category.objects.filter(group__part="softwear_solution")
     packages = Category.objects.filter(group__part="package")
 
@@ -60,7 +60,7 @@ def buy(request, id):
      
 
 def about(request):
-    service = Category.objects.filter(group__part="service") 
+    service = Service.objects.all()
     softwear = Category.objects.filter(group__part="softwear_solution")
     packages = Category.objects.filter(group__part="package")
 
@@ -72,7 +72,7 @@ def portfolio(request):
 
     portfolio_items = Portfolio.objects.all()
 
-    service = Category.objects.filter(group__part="service") 
+    service = Service.objects.all()
     softwear = Category.objects.filter(group__part="softwear_solution")
     packages = Category.objects.filter(group__part="package")
 
@@ -86,7 +86,7 @@ def team_member(request):
 
     team_members = TeamMember.objects.all()
 
-    service = Category.objects.filter(group__part="service") 
+    service = Service.objects.all()
     softwear = Category.objects.filter(group__part="softwear_solution")
     packages = Category.objects.filter(group__part="package")
 
@@ -99,7 +99,7 @@ def client(request):
 
     clients = Client.objects.all()
 
-    service = Category.objects.filter(group__part="service") 
+    service = Service.objects.all() 
     softwear = Category.objects.filter(group__part="softwear_solution")
     packages = Category.objects.filter(group__part="package")
 
@@ -143,7 +143,7 @@ def my_contact(request):
             
             form = ContactForm()  
     
-    service = Category.objects.filter(group__part="service") 
+    service = Service.objects.all() 
     softwear = Category.objects.filter(group__part="softwear_solution")
     packages = Category.objects.filter(group__part="package") 
     
@@ -153,3 +153,15 @@ def my_contact(request):
     return render(request, 'contact.html', context) 
     
 
+def service(request):
+
+    clients = Client.objects.all()
+
+    service = Service.objects.all()
+    softwear = Category.objects.filter(group__part="softwear_solution")
+    packages = Category.objects.filter(group__part="package")
+
+    context = {'clients': clients,'success': True, 'id': id,'service': service, 'softwear': softwear, 'packages': packages}   
+
+    
+    return render(request, 'backup.html', context)

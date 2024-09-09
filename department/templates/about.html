@@ -87,10 +87,14 @@
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Service</a>
             <div class="dropdown-menu m-0">
               {% for service in service %}
-              <a href="{% url 'details' service.slug %}" class="dropdown-item">
-                <img src="{% static 'img/hm.png' %}" alt="Certifications and Standards Icon" class="icon" />
-                {{service.category_name}}
-              </a>
+              <a href="{% url 'service'%}" class="dropdown-item">
+                <img
+                  src="{% static 'img/hm.png' %}"
+                  alt="Service Icon"
+                  class="icon"
+                />
+                {{service.name}}
+              </a> 
               {% endfor %}
             </div>
           </div>

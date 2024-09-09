@@ -116,14 +116,14 @@
             >
             <div class="dropdown-menu m-0">
               {% for service in service %}
-              <a href="{% url 'details' service.slug %}" class="dropdown-item">
+              <a href="{% url 'service'%}" class="dropdown-item">
                 <img
                   src="{% static 'img/hm.png' %}"
-                  alt="Certifications and Standards Icon"
+                  alt="Service Icon"
                   class="icon"
                 />
-                {{service.category_name}}
-              </a>
+                {{service.name}}
+              </a> 
               {% endfor %}
             </div>
           </div>
